@@ -7,10 +7,14 @@
 
 <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
 
+
 </head>
 <body>
-
-
+	{%if name in facebook_friends%}
+	<p style="color:green">this friend doesn't exists</p>
+	{%else%}
+	<p style="color:pink">this friend exists</p>
+	{%endif%}
 
 </body>
 </html>

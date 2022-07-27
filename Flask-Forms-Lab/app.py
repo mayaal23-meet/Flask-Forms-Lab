@@ -7,22 +7,29 @@ app = Flask(  # Create a flask app
 	static_folder='static'  # Name of directory for static files
 )
 
-
 username = "maya.papaya"
 password = "1234"
-facebook_friends=["Loai","Yonathan","Adan", "George", "Fouad", "Celina"]
+facebook_friends=["Noa","Mayar","Shalev 1", "Shalev 2", "Avigail", "Ella"]
 
 
 @app.route('/', methods=['GET','POST'])  # '/' for the default page
 def login():
   if request.method =='POST':
-  	return render_template('home.html')
+  	username1  = request.form['username']
+  	password1 = request.form['password']
+  	if username1 == username and password1 == password:
+  		return redirect(url_for('home'))
   else:
   	return render_template('login.html')
-  
  
-  
+@app.route('/home', methods=['GET','POST']) 
+def home():
+	return render_template('home.html',facebook_friends=facebook_friends)
 
+@app.route('/friend_exists/<string:name>', methods=['GET','POST'])
+def friend_exists(name):
+	return render_template('friend_exists.html', n=name , facebook_friends=facebook_friends)
+	
 
 
 if __name__ == "__main__":  # Makes sure this is the main process
